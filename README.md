@@ -69,7 +69,21 @@ OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm.py --input-tokens 32 --ma
 ```
 ### Example output
 ```bash
-
+---- Prompt size: 512
+[2024-01-10-06-25-00] Iteration 1 token latency: 97.7842948436737 sec
+[2024-01-10-06-36-47] Iteration 2 token latency: 106.43137431144714 sec
+[2024-01-10-06-48-45] Iteration 3 token latency: 97.99792194366455 sec
+[2024-01-10-07-01-19] Iteration 4 token latency: 116.03425550460815 sec
+[2024-01-10-07-13-20] Iteration 5 token latency: 93.38325834274292 sec
+[2024-01-10-07-25-19] Iteration 6 token latency: 110.51585626602173 sec
+[2024-01-10-07-37-04] Iteration 7 token latency: 108.74671125411987 sec
+[2024-01-10-07-48-54] Iteration 8 token latency: 107.04621076583862 sec
+[2024-01-10-08-01-07] Iteration 9 token latency: 108.75247311592102 sec
+[2024-01-10-08-12-41] Iteration 10 token latency: 93.31934213638306 sec
+First token average latency: 1.807 sec.
+Average 2... latency: 0.332 sec.
+P90 2... latency: 0.214 sec.
+P99 2... latency: 1.818 sec.
 ```
 
 Note: The calculation methods for the two types of latency are as follows: Set the output token count to 1, generate the model's output, and record the time taken for generating the first token as the latency of the first token. Next, set the output token count to a fixed value, generate the model's output, subtract the time taken for the first token, and calculate the average latency time for the remaining tokens. Finally, this average latency time can be used as the latency for the next token.
