@@ -45,6 +45,7 @@ python chatglm.py --help # for more detailed usages
 | `--batch-size` | Batch size (default: 1). |
 | `--repeats` | Number of repetitions to calculate the average latency (default: 12). |
 | `--prompt` | Input prompt for self-defined if needed. |
+
 Note: You may need to log in your HuggingFace account to access the model files. Please refer to HuggingFace login.
 
 ## Example usages of Python script
