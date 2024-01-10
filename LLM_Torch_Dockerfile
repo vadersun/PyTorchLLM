@@ -42,7 +42,7 @@ RUN . ./miniconda3/bin/activate && pip config set global.index-url https://mirro
 COPY llm /home/ubuntu/llm
 RUN . ./miniconda3/bin/activate && \
     conda create -y -n compile_py310 python=3.10 && conda activate compile_py310 && \
-    pip install torch==1.9.0+cpu -f https://download.pytorch.org/whl/torch_stable.html && \
+    pip install torch==2.1.1+cpu -f https://download.pytorch.org/whl/torch_stable.html && \
     pip install transformers==4.31.0 && \
     pip install sentencepiece
 
@@ -54,7 +54,7 @@ RUN . ./miniconda3/bin/activate && \
     conda create -y -n py310 python=3.10 && conda activate py310 && \
     echo "conda activate py310" >> ./.bashrc && \
     echo "echo \"**Note:** For better performance, please consider to launch workloads with command 'ipexrun'.\"" >> ./.bashrc && \
-    pip install torch==1.9.0+cpu -f https://download.pytorch.org/whl/torch_stable.html && \
+    pip install torch==2.1.1+cpu -f https://download.pytorch.org/whl/torch_stable.html && \
     pip install transformers==4.31.0 && \
     pip install sentencepiece && \
     python -m pip cache purge && \
