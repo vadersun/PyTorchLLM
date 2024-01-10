@@ -37,9 +37,8 @@ RUN curl -fsSL -v -o miniconda.sh -O https://repo.anaconda.com/miniconda/Minicon
 
 ARG COMPILE
 FROM base AS dev
-
-# 设置pip源
 RUN . ./miniconda3/bin/activate && pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+
 COPY llm /home/ubuntu/llm
 RUN . ./miniconda3/bin/activate && \
     conda create -y -n compile_py310 python=3.10 && conda activate compile_py310 && \
