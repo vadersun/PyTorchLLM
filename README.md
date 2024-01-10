@@ -71,3 +71,5 @@ OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm.py --input-tokens 32 --ma
 ```bash
 
 ```
+
+Note: The calculation methods for the two types of latency are as follows: Set the output token count to 1, generate the model's output, and record the time taken for generating the first token as the latency of the first token. Next, set the output token count to a fixed value, generate the model's output, subtract the time taken for the first token, and calculate the average latency time for the remaining tokens. Finally, this average latency time can be used as the latency for the next token.
