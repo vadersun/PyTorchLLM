@@ -90,6 +90,7 @@ Latency results for each iteration:
 ```
 Summary of the latency results:
 ```bash
+# First token average latency
 First token average latency: 1.807 sec.
 # Token average latency
 Average 2... latency: 0.332 sec.
