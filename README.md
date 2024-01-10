@@ -56,10 +56,16 @@ Note: You may need to log in your HuggingFace account to access the model files.
 # Please adjust the settings per your hardware.
 
 # Running FP32 Llama-2-7b model
-OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype float32
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --dtype float32
 
 # Running BF16 Llama-2-7b model
-OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype bfloat16
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --dtype bfloat16
+
+# Running BF16 Llama-2-7b model, input/output tokens = 64, batch size = 8
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --input-tokens 64 --max-new-tokens 64 --batch-size 8 --dtype bfloat16
+
+# Running BF16 Llama-2-7b model, input/output tokens = 64, batch size = 8, perform calculations 4 times and average the results for a faster iteration
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --input-tokens 64 --max-new-tokens 64 --batch-size 8 --dtype bfloat16 --repeats 4
 
 # Running FP32 chatglm-2-6b model
 OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype float32
@@ -68,6 +74,7 @@ OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm.py --input-tokens 32 --ma
 OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype bfloat16
 ```
 ### Example output
+Latency results for each iteration:
 ```bash
 ---- Prompt size: 512
 [2024-01-10-06-25-00] Iteration 1 token latency: 97.7842948436737 sec
@@ -80,9 +87,15 @@ OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm.py --input-tokens 32 --ma
 [2024-01-10-07-48-54] Iteration 8 token latency: 107.04621076583862 sec
 [2024-01-10-08-01-07] Iteration 9 token latency: 108.75247311592102 sec
 [2024-01-10-08-12-41] Iteration 10 token latency: 93.31934213638306 sec
+```
+Summary of the latency results:
+```bash
 First token average latency: 1.807 sec.
+# Token average latency
 Average 2... latency: 0.332 sec.
+# The 90th percentile (P90) latency for next tokens
 P90 2... latency: 0.214 sec.
+# The 99th percentile (P99) latency for next tokens
 P99 2... latency: 1.818 sec.
 ```
 
