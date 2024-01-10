@@ -29,3 +29,44 @@ pip install sentencepiece
 ```
 
 ## Run Models Generations
+You can run LLM with a Python script "llama.py/chatglm.py/..." for all inference cases.
+```bash
+python llama.py --help # for more detailed usages
+python chatglm.py --help # for more detailed usages
+```
+
+| Key Args        | Notes           |
+| ------------- |-------------|
+| `--dtype`      | Data type (default: bfloat16). |
+| `--input-tokens`      | Number of input tokens (default: 32). |
+| `--max-new-tokens` | Maximum number of new tokens to generate (default: 32). |
+| `--num-iter` | Number of iterations (default: 10). |
+| `--num-warmup` | Number of warmup iterations (default: 5). |
+| `--batch-size` | Batch size (default: 1). |
+| `--repeats` | Number of repetitions to calculate the average latency (default: 12). |
+| `--prompt` | Input prompt for self-defined if needed. |
+Note: You may need to log in your HuggingFace account to access the model files. Please refer to HuggingFace login.
+
+## Example usages of Python script
+### Quick start example commands for benchmarking
+```bash
+# The following "OMP_NUM_THREADS" and "numactl" settings are based on the assumption that
+# the target server has 48 physical cores per numa socket, and we benchmark with 1 socket.
+# Please adjust the settings per your hardware.
+
+# Running FP32 Llama-2-7b model
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype float32
+
+# Running BF16 Llama-2-7b model
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype bfloat16
+
+# Running FP32 chatglm-2-6b model
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype float32
+
+# Running BF16 chatglm-2-6b model
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype bfloat16
+```
+### Example output
+```bash
+
+```
