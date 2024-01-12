@@ -104,8 +104,8 @@ average_2n = vNextTokenList
 average_2n.sort()
 p90_index = int(len(average_2n) * 0.9)
 p99_index = int(len(average_2n) * 0.99)
-print(p90_index)
-print(p99_index)
+# print(p90_index)
+# print(p99_index)
 p90_latency = average_2n[p90_index]
 p99_latency = average_2n[p99_index]
 print("First token average latency: %.3f sec." % first_latency)
