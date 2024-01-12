@@ -11,7 +11,7 @@ cd PyTorchLLM
 2. It is highly recommended to build a Docker container from the provided Dockerfile ("LLM_Torch_Dockerfile").
 ```bash
 # Build an image with the provided Dockerfile
-DOCKER_BUILDKIT=1 docker build -f /home/kanli/zhenhui/LLM_Torch_Dockerfile --network=host --no-cache --build-arg COMPILE=ON -t torch-llm:2.1.100 .\
+DOCKER_BUILDKIT=1 docker build -f LLM_Torch_Dockerfile --network=host --no-cache --build-arg COMPILE=ON -t torch-llm:2.1.100 .\
 # Run the container with command below
 docker run --rm -it --privileged torch-llm:2.1.100 bash
 # When the command prompt shows inside the docker container, enter llm examples directory
