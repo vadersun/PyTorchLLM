@@ -31,8 +31,8 @@ pip install sentencepiece
 ## Run Models Generations
 You can run LLM with a Python script "llama.py/chatglm.py/..." for all inference cases.
 ```bash
-python llama.py --help # for more detailed usages
-python chatglm.py --help # for more detailed usages
+python llama-2-7b-hf.py --help # for more detailed usages
+python chatglm-2-6b.py --help # for more detailed usages
 ```
 
 | Key Args        | Notes           |
@@ -56,22 +56,22 @@ Note: You may need to log in your HuggingFace account to access the model files.
 # Please adjust the settings per your hardware.
 
 # Running FP32 Llama-2-7b model
-OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --dtype float32
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama-2-7b-hf.py --dtype float32
 
 # Running BF16 Llama-2-7b model
-OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --dtype bfloat16
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama-2-7b-hf.py --dtype bfloat16
 
 # Running BF16 Llama-2-7b model, input/output tokens = 64, batch size = 8
-OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --input-tokens 64 --max-new-tokens 64 --batch-size 8 --dtype bfloat16
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama-2-7b-hf.py --input-tokens 64 --max-new-tokens 64 --batch-size 8 --dtype bfloat16
 
 # Running BF16 Llama-2-7b model, input/output tokens = 64, batch size = 8, perform calculations 4 times and average the results for a faster iteration
-OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama.py --input-tokens 64 --max-new-tokens 64 --batch-size 8 --dtype bfloat16 --repeats 4
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python llama-2-7b-hf.py --input-tokens 64 --max-new-tokens 64 --batch-size 8 --dtype bfloat16 --repeats 4
 
 # Running FP32 chatglm-2-6b model
-OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype float32
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm-2-6b.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype float32
 
 # Running BF16 chatglm-2-6b model
-OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype bfloat16
+OMP_NUM_THREADS=48 numactl -m 0 -C 0-47 python chatglm-2-6b.py --input-tokens 32 --max-new-tokens 32 --batch-size 1 --dtype bfloat16
 ```
 ### Example output
 Latency results for each iteration:
