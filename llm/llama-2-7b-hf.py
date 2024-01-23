@@ -37,7 +37,7 @@ input_tokens = args.input_tokens
 output_tokens = args.max_new_tokens
 batch_size = args.batch_size
 repeats = 12
-if args.repeats<batch_size:
+if args.repeats<=batch_size and args.repeats > 1:
     repeats = args.repeats
 
 # generate output example
@@ -89,7 +89,8 @@ for j in range(num_iterations):
                 output = f"[{current_time}] Iteration {j+1} token latency: {token_latency} sec"
                 print(output)
             if j >= num_warmup:
-                vNextTokenList.append(token_latency/(i+1))
+                if i != 0:
+                    vNextTokenList.append(token_latency/(i+1))
                 # print(token_latency/(i+1))
 
         if j >= num_warmup:
